@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/template/admin-template.xhtml">
+	<ui:define name="title">Category</ui:define>
+	<ui:define name="sub-title">Category</ui:define>
+	<ui:define name="sub-title1">CategoryLists</ui:define>
+	<ui:define name="btn-action">
+		<h:commandLink onclick="$('#edit').modal('show')" styleClass="btn btn-outline-primary float-right">
+			<f:ajax listener="#{categoryBean.retriCat(0)}" render="form"></f:ajax>
+			Add
+		</h:commandLink>
+	</ui:define>
+	<ui:define name="main-content">
+			<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Category Table</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <h:dataTable binding="#{tb}" styleClass="table table-bordered" id="dataTable" value="#{categoryBean.categories}" var="c" width="100%" cellspacing="0" >
+                                	<h:column >
+                                		<f:facet name="header">No</f:facet>
+                                		#{tb.rowIndex+1}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Name</f:facet>
+                                		#{c.name}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Created_at</f:facet>
+                                		#{c.created_at}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Updated_at</f:facet>
+                                		#{c.updated_at}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Created By</f:facet>
+                                		#{c.createdBy.name}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Updated By</f:facet>
+                                		#{c.updatedBy.name}
+                                	</h:column>
+                                	<h:column>
+                                		<f:facet name="header">Action</f:facet>
+                                		<div class="d-flex">
+                                			<h:commandLink styleClass="btn btn-outline-info mb-2 mr-2" onclick="$('#edit').modal('show')"  >
+	                                			<i class="fas fa-edit"></i>
+	                                			<f:ajax listener="#{categoryBean.retriCat(c.id)}" render="form"></f:ajax>
+	                                		</h:commandLink>
+	                                		
+	                                		<h:form>
+	                                			<h:commandLink styleClass="btn btn-outline-danger" action="#{categoryBean.delete(c.id)}" onclick="if(!confirm('U Sure Wanted Delete')) return false">
+		                                			<i class="fas fa-minus"></i>
+		                                		</h:commandLink>	
+	                                		</h:form>
+                                		</div>
+ 
+                                	</h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+					<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog " role="document">
+					    <h:form id="form">
+					    	<div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLongTitle">Add Category</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+				        		<div class="form-group">
+				        			<label for="">Name</label>
+				        			<h:inputText onkeyup="return check()" value="#{categoryBean.category.name}" styleClass="form-control name" id="name" >
+				        				<f:ajax  event="keyup" render="save errMsg" listener="#{categoryBean.checkCategory()}" execute="@form"></f:ajax>
+				        			</h:inputText>
+				        			<small class="text-danger" >
+				        				<h:outputText value="#{categoryBean.msg}" id="errMsg" style="font-size:12px;" styleClass="something" />
+				        			</small>
+				        		</div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        <h:commandButton action="#{categoryBean.save()}" value="Save" styleClass="btn btn-primary btn-save" id="save" disabled="#{categoryBean.disabled}"/>
+					      </div>
+					    </div>
+					    </h:form>
+					  </div>
+					</div>
+	</ui:define>
+	<ui:define name="js">
+		<script >
+			function check(){
+				
+					if($.trim($('.name').val()) == ''){
+						
+						$('.btn-save').attr('disabled','disabled');
+						$('.something').html("");
+						return false;
+						}
+			
+				}
+		</script>
+	</ui:define>
+</ui:composition>
+</html>

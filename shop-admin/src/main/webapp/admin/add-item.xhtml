@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/template/admin-template.xhtml">
+	<ui:define name="title">Add Item</ui:define>
+	<ui:define name="sub-title">Item</ui:define>
+	<ui:define name="sub-title1">Create Item</ui:define>
+	<ui:define name="btn-action">
+		<h:link outcome="items" styleClass="btn btn-dark float-right">
+			Back
+		</h:link>
+	</ui:define>
+	<ui:define name="main-content">
+		<div class="container">
+			<div class="card">
+				<div class="card-body">
+					<h:form styleClass="form">
+						<div class="form-group">
+							<label for="">Photo</label>
+							<h:inputText value="#{itemBean.item.photo}" p:type="file" styleClass="form-control-file"/>
+						</div>
+						<div class="form-group">
+							<label for="">Item Name</label> 
+							<h:inputText value="#{itemBean.item.name}" styleClass="form-control" />
+						</div>
+						<div class="form-group">
+							<label for="">Item Price</label> 
+							<h:inputText p:type="number" value="#{itemBean.item.price}" styleClass="form-control" />
+						</div>
+						<div class="form-group">
+							<label for="">Category</label> 
+							<h:selectOneMenu value="#{itemBean.item.category}" styleClass="form-control">
+								<f:selectItems value="#{categoryBean.categories}" var="c" itemLabel="#{c.name}" itemValue="#{c}"></f:selectItems>
+								<f:converter binding="#{categoryConverter}"></f:converter>
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group">
+							<label for="">Type</label> 
+							<h:selectOneMenu value="#{itemBean.item.type}" styleClass="form-control">
+								<f:selectItem itemValue="Male" itemLabel="Male"></f:selectItem>
+								<f:selectItem itemValue="Female" itemLabel="Female"></f:selectItem>
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group">
+							<label for="">Brand</label> 
+							<h:selectOneMenu value="#{itemBean.item.brand}" styleClass="form-control">
+								<f:selectItems value="#{brandBean.brands}" var="c" itemLabel="#{c.name}" itemValue="#{c}"></f:selectItems>
+								<f:converter binding="#{brandConverter}"></f:converter>
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group">
+							<label for="">Description</label>
+							<h:inputTextarea value="#{itemBean.item.description}" styleClass="form-control" />
+						</div>
+						
+						<div class="form-group">
+							<h:commandButton action="#{itemBean.save()}" value="Create" styleClass="btn btn-outline-primary" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

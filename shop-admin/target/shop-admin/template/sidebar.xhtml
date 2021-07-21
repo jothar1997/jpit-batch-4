@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition>
+		<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0"></hr>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <h:link styleClass="nav-link" outcome="/index">
+                   <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                 </h:link>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider"></hr>
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item #{view.viewId eq '/admin/brands.xhtml'? 'active':''} ">
+                 <h:link styleClass="nav-link" outcome="/admin/brands" >
+                 	<i class="fab fa-apple"></i>
+                 	<span>Brands</span>
+                 </h:link>
+            </li>
+            <li class="nav-item #{view.viewId eq '/admin/categories.xhtml'? 'active':''}">
+                 <h:link styleClass="nav-link " outcome="/admin/categories" >
+                  	<i class="fas fa-paw"></i>
+                 	<span>categories</span>
+                 </h:link>
+            </li>
+            <li class="nav-item #{view.viewId eq '/admin/user.xhtml'? 'active':''}">
+                 <h:link styleClass="nav-link" outcome="/admin/user" >
+                  	<i class="fas fa-user-plus"></i>
+                 	<span>User</span>
+                 </h:link>
+            </li>
+            <li class="nav-item #{view.viewId eq '/admin/items.xhtml'? 'active':''}">
+                 <h:link styleClass="nav-link" outcome="/admin/items">
+                  <i class="fas fa-tshirt"></i>
+                  <span>Item</span>
+                 </h:link>
+            </li>
+            <li class="nav-item #{view.viewId eq '/admin/table.xhtml'? 'active':''}"> 
+                 <h:link styleClass="nav-link" outcome="/table">
+                   <i class="fas fa-fw fa-table"></i>
+                   <span>Tables</span>
+                 </h:link>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block"></hr>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+</ui:composition>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/template/admin-template.xhtml">
+	<ui:define name="title">Add User</ui:define>
+	<ui:define name="sub-title">User</ui:define>
+	<ui:define name="sub-title1">#{userBean.user.id == 0? 'Create' : 'Update'} User</ui:define>
+	<ui:define name="btn-action">
+		<h:link outcome="user" styleClass="btn btn-dark float-right">
+			Back
+		</h:link>
+	</ui:define>
+	<ui:define name="main-content">
+		<div class="container">
+			<div class="card">
+				<div class="card-body">
+					<h:form styleClass="form" id="form">
+						<div class="form-group">
+							<label for="">Name</label> 
+							<h:inputText value="#{userBean.user.name}" styleClass="form-control" />
+						</div>
+						<div class="form-group">
+							<label for="">Email</label> 
+							<h:inputText p:type="email" value="#{userBean.user.email}" styleClass="form-control" id="email">
+								<f:ajax event="keyup" render="errMsg" listener="#{userBean.checkEmail()}" execute="@form"></f:ajax>
+							</h:inputText>
+							<small>
+								<h:outputText value="#{userBean.msg}" id="errMsg" styleClass="text-danger" /><br></br>
+								<h:message for="email" styleClass="text-danger"></h:message>
+							</small>
+						</div>
+						<div class="form-group">
+							<label for="">Password</label> 
+							<h:inputText p:type="password" value="#{userBean.user.password}" styleClass="form-control" />
+						</div>
+						<div class="form-group">
+							<label for="">Phone</label> 
+							<h:inputText p:type="number" value="#{userBean.user.phone}" styleClass="form-control" />
+						</div>
+						<div class="form-group">
+							<label for="">Access Level</label>
+							<h:selectOneMenu styleClass="form-control" value="#{userBean.user.accessLevel}">
+								<f:selectItem itemLabel="Admin" itemValue="Admin" />
+								<f:selectItem itemLabel="Staff" itemValue="Staff" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group">
+							<label for="">Address</label>
+							<h:inputTextarea value="#{userBean.user.address}" styleClass="form-control" />
+						</div>
+						<div class="form-group">
+							<h:commandButton action="#{userBean.save()}" styleClass="btn btn-outline-primary"  value="#{userBean.user.id == 0? 'Create' : 'Update'}">
+								
+							</h:commandButton>
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

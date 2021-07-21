@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/template/admin-template.xhtml">
+	<ui:define name="title">User</ui:define>
+	<ui:define name="sub-title">User</ui:define>
+	<ui:define name="sub-title1">UserLists</ui:define>
+	<ui:define name="btn-action">
+		<h:link outcome="add-user" styleClass="btn btn-dark float-right">
+			Add New
+		</h:link>
+	</ui:define>
+	<ui:define name="main-content">
+			<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Brand Table</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <h:dataTable binding="#{tb}" styleClass="table table-bordered" id="dataTable" value="#{userBean.users}" var="c" width="100%" cellspacing="0" >
+                                	<h:column >
+                                		<f:facet name="header">No</f:facet>
+                                		#{tb.rowIndex+1}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Name</f:facet>
+                                		#{c.name}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Email</f:facet>
+                                		#{c.email}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Phone</f:facet>
+                                		#{c.phone}
+                                	</h:column>
+                                	<h:column >
+                                		<f:facet name="header">Address</f:facet>
+                                		#{c.address}
+                                	</h:column>
+                                	<h:column>
+                                		<f:facet name="header">Action</f:facet>
+                                		<div class="d-flex">
+                               				<h:link styleClass="btn btn-outline-info mb-2 mr-2" outcome="add-user">
+	                                			<i class="fas fa-edit"></i>
+	                                			<f:param name="id" value="#{c.id}"></f:param>
+	                                		</h:link>
+	                                		
+	                                		<h:form>
+	                                			<h:commandLink styleClass="btn btn-outline-danger" action="#{userBean.remove(c.id)}" >
+		                                			<i class="fas fa-minus"></i>
+		                                		</h:commandLink>	
+	                                		</h:form>
+                                		</div>
+ 
+                                	</h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+					
+	</ui:define>
+	<ui:define name="js">
+		<script >
+			$(document).ready(function(){
+					$('#save').click(function(){
+							
+						if($('#name').val()==null){
+								$('.error').html("Name Must Be Required");
+								return null;
+							}
+					});
+				});
+		</script>
+	</ui:define>
+</ui:composition>
+</html>

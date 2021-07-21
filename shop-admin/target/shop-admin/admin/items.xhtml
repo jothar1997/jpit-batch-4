@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/template/admin-template.xhtml">
+	<ui:define name="title">Item</ui:define>
+	<ui:define name="sub-title">Item</ui:define>
+	<ui:define name="sub-title1">Item Lists</ui:define>
+	<ui:define name="btn-action">
+		<h:link outcome="add-item" styleClass="btn btn-dark float-right">
+			
+			Add New
+		</h:link>
+	</ui:define>
+	<ui:define name="main-content">
+		<div class="card shadow mb-4">
+           <div class="card-header py-3">
+               <h6 class="m-0 font-weight-bold text-primary">Item Table</h6>
+           </div>
+           <div class="card-body">
+               <div class="table-responsive">
+                   <h:dataTable binding="#{tb}" styleClass="table table-bordered" id="dataTable" value="#{itemBean.items}" var="c" width="100%" cellspacing="0" >
+                   	<h:column >
+                   		<f:facet name="header">No</f:facet>
+                   		#{tb.rowIndex+1}
+                   	</h:column>
+                   	<h:column >
+                   		<f:facet name="header">Name</f:facet>
+                   		#{c.name}
+                   	</h:column>
+                   	<h:column >
+                   		<f:facet name="header">Price</f:facet>
+                   		#{c.price}
+                   	</h:column>
+                   	<h:column >
+                   		<f:facet name="header">Category</f:facet>
+                   		#{c.category.name}
+                   	</h:column>
+                   	<h:column >
+                   		<f:facet name="header">Brand</f:facet>
+                   		#{c.brand.name}
+                   	</h:column>
+                   	<h:column >
+                   		<f:facet name="header">Type</f:facet>
+                   		#{c.type}
+                   	</h:column>
+                   	<h:column>
+                   		<f:facet name="header">Action</f:facet>
+	                   		<div class="d-flex">
+	                   			<h:link styleClass="btn btn-outline-info mb-2 mr-2" outcome="add-item">
+		                   			<i class="fas fa-edit">
+		                   			<f:param name="id" value="#{c.id}"></f:param>
+		                   		</i></h:link>
+		                   		<h:form>
+		                   			<h:commandLink styleClass="btn btn-outline-danger" action="#{itemBean.remove(c.id)}" >
+		                    			<i class="fas fa-minus"></i>
+		                    		</h:commandLink>	
+		                   		</h:form>
+	                   		</div>
+
+                   	</h:column>
+                   </h:dataTable>
+               </div>
+           </div>
+       </div>
+	</ui:define>
+	
+</ui:composition>
+</html>
