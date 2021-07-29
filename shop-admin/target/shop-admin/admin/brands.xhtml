@@ -9,9 +9,9 @@
 	<ui:define name="sub-title">Brand</ui:define>
 	<ui:define name="sub-title1">BrandLists</ui:define>
 	<ui:define name="btn-action">
-		<h:commandLink onclick="$('#edit').modal('show')" styleClass="btn btn-outline-primary float-right">
-			<f:ajax listener="#{brandBean.retriCat()}" render="form"></f:ajax>
-			Add
+		<h:commandLink onclick="$('#edit').modal('show')" styleClass="btn btn-dark float-right">
+			<f:ajax listener="#{brandBean.retriCat(0)}" render="form"></f:ajax>
+			Add New
 		</h:commandLink>
 	</ui:define>
 	<ui:define name="main-content">
@@ -72,7 +72,7 @@
 					    <h:form id="form">
 					    	<div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLongTitle">Add Category</h5>
+					        <h5 class="modal-title" id="exampleModalLongTitle">Add Brand</h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
@@ -80,13 +80,17 @@
 					      <div class="modal-body">
 				        		<div class="form-group">
 				        			<label for="">Name</label>
-				        			<h:inputText value="#{brandBean.brand.name}" styleClass="form-control" id="name" />
-				        			<small class="error text-danger"><span></span></small>
+				        			<h:inputText onkeyup="return check()" value="#{brandBean.brand.name}" styleClass="form-control name" id="name" >
+				        				<f:ajax  event="keyup" render="save errMsg" listener="#{brandBean.checkBrand()}" execute="@form"></f:ajax>
+				        			</h:inputText>
+				        			<small class="text-danger" >
+				        				<h:outputText value="#{brandBean.msg}" id="errMsg" style="font-size:12px;" styleClass="something" />
+				        			</small>
 				        		</div>
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <h:commandButton action="#{brandBean.save()}" value="Save" styleClass="btn btn-primary btn-save" id="save" />
+					        <h:commandButton action="#{brandBean.save()}" value="Save" styleClass="btn btn-primary btn-save" id="save" disabled="#{brandBean.disabled}"/>
 					      </div>
 					    </div>
 					    </h:form>
@@ -95,15 +99,16 @@
 	</ui:define>
 	<ui:define name="js">
 		<script >
-			$(document).ready(function(){
-					$('#save').click(function(){
-							
-						if($('#name').val()==null){
-								$('.error').html("Name Must Be Required");
-								return null;
-							}
-					});
-				});
+			function check(){
+				
+					if($.trim($('.name').val()) == ''){
+						
+						$('.btn-save').attr('disabled','disabled');
+						$('.something').html("");
+						return false;
+						}
+			
+				}
 		</script>
 	</ui:define>
 </ui:composition>

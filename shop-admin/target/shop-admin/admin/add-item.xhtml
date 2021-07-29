@@ -17,7 +17,15 @@
 		<div class="container">
 			<div class="card">
 				<div class="card-body">
-					<h:form styleClass="form">
+					<h:form styleClass="form" enctype='multipart/form-data'>
+						<div class="form-group">
+							<label for="">Photo</label>
+							
+							<h:inputFile value="#{itemBean.imgPart}"  styleClass="form-control-file" >
+							
+							</h:inputFile>
+						
+						</div>
 						<div class="form-group">
 							<label for="">Item Name</label> 
 							<h:inputText value="#{itemBean.item.name}" styleClass="form-control" />
@@ -36,8 +44,8 @@
 						<div class="form-group">
 							<label for="">Type</label> 
 							<h:selectOneMenu value="#{itemBean.item.type}" styleClass="form-control">
-								<f:selectItem itemValue="Male" itemLabel="Male"></f:selectItem>
-								<f:selectItem itemValue="Female" itemLabel="Female"></f:selectItem>
+								<f:selectItem value="Men">Men</f:selectItem>
+								<f:selectItem value="Women">Women</f:selectItem>
 							</h:selectOneMenu>
 						</div>
 						<div class="form-group">

@@ -4,7 +4,255 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
-<ui:composition template="/template/admin-template.xhtml">
-	
+<ui:composition template="/frontend-template/frontend-template.xhtml">
+	<ui:define name="main-content">
+		<main style="margin-top:90px;">
+	<div class="row justify-content-center" id="home">
+        <div class="col-md-10">
+            <!-- Carousel -->
+            <div id="Carousel3" class="carousel slide shadow-soft border border-light p-4 rounded" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#Carousel3" data-slide-to="0" class="active"></li>
+                    <li data-target="#Carousel3" data-slide-to="1"></li>
+                    <li data-target="#Carousel3" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner rounded">
+                    <div class="carousel-item active">
+                        <h:graphicImage library="assets" styleClass="d-block w-100" alt="First Slide" name="img/carousel/image-1.jpg"/>
+                    </div>
+                    <div class="carousel-item">
+                   		<h:graphicImage library="assets" styleClass="d-block w-100" alt="First Slide" name="img/carousel/image-2.jpg"/>                    </div>
+                    <div class="carousel-item">
+                        <h:graphicImage library="assets" styleClass="d-block w-100" alt="First Slide" name="img/carousel/image-3.jpg"/>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#Carousel3" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#Carousel3" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <!-- End of Carousel -->
+        </div>
+    </div>
+     <section class="section section-lg pt-0 pb-0 my-4" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card bg-primary shadow-soft border-light p-4">
+                            <div class="row">
+                                <div class="col-12 col-lg-4 px-md-0 mb-4 mb-lg-0">
+                                    <div class="card-body text-center bg-primary py-5">
+                                        <div class="icon icon-shape shadow-inset border-light rounded-circle mb-3">
+                                            <span class="far fa-eye"></span>
+                                        </div>
+                                        <!-- Heading -->
+                                        <h2 class="h4 mr-2">
+                                            Audience
+                                        </h2>
+                                        <!-- Text -->
+                                        <p class="mb-0">At Themesberg, we use human, brand, and cultural insights to unlock strategic business opportunities for clients.</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4 px-md-0 mb-4 mb-lg-0">
+                                    <div class="card-body text-center bg-primary py-5">
+                                        <div class="icon icon-shape shadow-inset border-light rounded-circle mb-3"> 
+                                            <span class="fas fa-medal"></span>
+                                        </div>
+                                        <!-- Heading -->
+                                        <h2 class="h4 mr-2">
+                                            Branding
+                                        </h2>
+                                        <!-- Text -->
+                                        <p class="mb-0">Despite being cautioned not to judge a book by its cover, we all do it every day. We making your site looks better.</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4 px-md-0">
+                                    <div class="card-body text-center bg-primary py-5">
+                                        <div class="icon icon-shape shadow-inset border-light rounded-circle mb-3">
+                                            <span class="fas fa-puzzle-piece"></span>
+                                        </div>
+                                        <!-- Heading -->
+                                        <h2 class="h4 mr-2">
+                                            Production
+                                        </h2>
+                                        <!-- Text -->
+                                        <p class="mb-0">Today, truly creative sells. Get innovative ideas and polished finish pieces from our creative agency.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section -->
+        <section class="section section-lg pt-0">
+            <div class="container">
+                <div class="row align-items-center justify-content-around">
+                    <div class="col-md-6 col-xl-6 mb-5">
+                        <div class="card bg-primary shadow-soft border-light organic-radius p-3">
+                            <h:graphicImage library="assets" name="img/about-us-1.jpg" styleClass="organic-radius img-fluid"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-5 text-center text-md-left">
+                        <h2 class="h1 mb-4">Design with us, Develop Anything.</h2>
+                        <p class="lead">Themesberg is an experienced and passionate group of designers, developers, project managers, writers and artists. Every client we work with becomes a part of the team. Together we face the challenges and celebrate the victories.</p>
+                        <p class="lead">Our small team is active in the creative community, endlessly interested in what’s next, and generally pleasant to be around.</p>
+                        <h:graphicImage library="assets" name="img/signature.svg" styleClass=" mt-4" width="150"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End of section -->
+        <div class="container" id="product">
+        <!-- Title -->
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="h5 mb-6">Product</h2>
+            </div>
+        </div>
+        <!-- End of title-->
+        <div class="row mb-5">
+			<ui:repeat var="i" value="#{itemBean.items}">
+				 <div class="col-12 col-md-6 col-lg-4 mb-5">
+	                <div class="card bg-primary border-light shadow-soft">
+	                    <div class="card-header p-3">
+	                       
+	                        <h:graphicImage library="uploads" name="#{i.photo}" styleClass="card-img-top rounded" />
+	                    </div>
+	                    <div class="card-body pt-2">
+	                        <div class="media d-flex align-items-center justify-content-between">
+	                            <div class="post-group">
+	                                <span>$#{i.price}</span>
+	                            </div>
+	                            <div class="d-flex align-items-center">
+	                                <span class="small"><span class="far fa-calendar-alt mr-2"></span>#{i.type}</span>
+	                            </div>
+	                        </div> 
+	                        <h3 class="h5 card-title mt-4">#{i.name}</h3>
+	                        <p class="card-text">#{i.description}</p>
+	                        <div class="">
+	                            <a href="#" class="btn btn-primary text-info float-right ml-2 animate-up-2"><i class="fas fa-cart-plus mr-2"></i>Add To Cart</a>
+	                            
+	                            <h:link styleClass="btn btn-primary text-success float-right animate-up-2" outcome="product-detail">
+	                            	<f:param name="id" value="#{i.id}"></f:param>
+	                            	<i class="fas fa-eye mr-2"></i>Detail
+	                            </h:link>
+	                        </div>
+	                    </div>
+	                  </div>
+	            </div>
+			
+			</ui:repeat>
+        </div>
+    </div>
+        <!-- end product -->
+         <!-- Section -->
+       
+        <section class="section section-lg pt-0 pb-0" id="contact">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-12 col-lg-12 mb-5">
+                        <!-- Contact Card -->
+                        <div class="card bg-primary shadow-soft border-light p-2 p-md-3 p-lg-5">
+                            <div class="card-header">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="shadow-inset p-4 mb-5 rounded">
+                                           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58323.47417201925!2d97.87155312142797!3d23.988108344040008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x372e071d5ffd854d%3A0xcae6796433127a07!2sMuse!5e0!3m2!1sen!2smm!4v1627401719377!5m2!1sen!2smm" class="map rounded" id="gmap_canvas"></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-8 text-center mb-5">
+                                        <h1 class="display-2 mb-3">Get in touch today</h1>
+                                        <p class="lead">Have a new project in mind? Need help with an ongoing one? Drop us a line about your project needs, we answer same day.</p>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-4 col-lg-4 text-center">
+                                        <!-- Visit Box -->
+                                        <div class="icon-box mb-4">
+                                            <div class="icon icon-shape shadow-soft border-light rounded-circle mb-4">
+                                                <span class="fas fa-map-marker-alt"></span>
+                                            </div>
+                                            <h2 class="h5 icon-box-title">Visit us</h2>
+                                            <span>
+                                                Myanmar, Shan<br/>
+                                                Muse
+                                            </span>
+                                        </div>
+                                        <!-- End of Visit Box -->
+                                    </div>
+                                    <div class="col-md-4 col-lg-4 text-center">
+                                        <!-- Call Box -->
+                                        <div class="icon-box mb-4">
+                                            <div class="icon icon-shape shadow-soft border-light rounded-circle mb-4">
+                                                <span class="fas fa-headphones-alt"></span>
+                                            </div>
+                                            <h2 class="h5 icon-box-title">Call</h2>
+                                            <span>+09761051414</span>
+                                            <div class="text-small text-gray">
+                                                Mon - Fri, 8am - 4pm
+                                            </div>
+                                        </div>
+                                        <!-- End of Call Box -->
+                                    </div>
+                                    <div class="col-md-4 col-lg-4 text-center">
+                                        <!-- Email Box -->
+                                        <div class="icon-box mb-4">
+                                            <div class="icon icon-shape shadow-soft border-light rounded-circle mb-4">
+                                                <span class="far fa-paper-plane"></span>
+                                            </div>
+                                            <h2 class="h5 icon-box-title">Email</h2>
+                                            <a href="#">saikyawmyotun.it@gmail.com</a>
+                                            
+                                        </div>
+                                        <!-- End of Email Box -->
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="col-12 col-md-8 mx-auto">
+                                <!-- Form -->
+                                <div class="form-group">
+                                    <label for="nameInputIcon2">Your Name</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="far fa-user-circle"></span></span>
+                                        </div>
+                                        <input class="form-control" id="nameInputIcon2" placeholder="e.g. Bonnie Green" type="text" aria-label="contact name input"></input>
+                                    </div>
+                                </div>
+                                <!-- Form -->
+                                <div class="form-group">
+                                    <label for="emailInputIcon2">Your Email</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="far fa-envelope"></span></span>
+                                        </div>
+                                        <input class="form-control" id="emailInputIcon2" placeholder="example@company.com" type="email" aria-label="contact email input"></input>
+                                    </div>
+                                </div>
+                                <!-- Form -->
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea2">Your Email</label>
+                                    <textarea class="form-control" placeholder="Enter your message..." id="exampleFormControlTextarea2" rows="4"></textarea>
+                                </div>
+                                <!-- End of Form -->
+                            </form>
+                            <div class="card-footer px-0 mx-auto">
+                                <button type="submit" class="btn btn-primary">Send message</button>
+                            </div>
+                        </div>
+                        <!-- End of Contact Card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End of section -->
+</main>
+	</ui:define>
 </ui:composition>
 </html>

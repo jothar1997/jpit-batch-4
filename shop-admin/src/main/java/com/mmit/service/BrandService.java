@@ -3,9 +3,11 @@ package com.mmit.service;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.mmit.bean.LoginBean;
 import com.mmit.entity.Brand;
 
 @Stateless
@@ -13,7 +15,8 @@ import com.mmit.entity.Brand;
 public class BrandService {
 	@PersistenceContext
 	private EntityManager em;
-	
+	@Inject
+	private LoginBean loginuser;
 	public List<Brand> findAll(){
 		return em.createNamedQuery("Brand.findAll", Brand.class).getResultList();
 	}
@@ -22,8 +25,10 @@ public class BrandService {
 	}
 	public void save(Brand brand) {
 		if(brand.getId() == 0) {
+			brand.setCreatedBy(loginuser.getLoginuser());
 			em.persist(brand);
 		}else {
+			brand.setUpdatedBy(loginuser.getLoginuser());
 			em.merge(brand);
 		}
 		
@@ -36,6 +41,16 @@ public class BrandService {
 		try {
 			return em.createNamedQuery("Brand.findName", String.class)
 			.setParameter("name", brand.getName()).setParameter("id", brand.getId()).getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	public Brand findBrandByName(String name) {
+		try {
+			return em.createNamedQuery("brand.findwithname", Brand.class)
+					.setParameter("name", name)
+					.getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

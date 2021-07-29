@@ -9,7 +9,7 @@
 	<ui:define name="sub-title">User</ui:define>
 	<ui:define name="sub-title1">UserLists</ui:define>
 	<ui:define name="btn-action">
-		<h:link outcome="add-user" styleClass="btn btn-dark float-right">
+		<h:link outcome="add-user" styleClass="btn btn-dark float-right" rendered="#{loginBean.loginuser.accessLevel == 'Admin'}">
 			Add New
 		</h:link>
 	</ui:define>
@@ -41,7 +41,7 @@
                                 		<f:facet name="header">Address</f:facet>
                                 		#{c.address}
                                 	</h:column>
-                                	<h:column>
+                                	<h:column rendered="#{loginBean.loginuser.accessLevel == 'Admin'}">
                                 		<f:facet name="header">Action</f:facet>
                                 		<div class="d-flex">
                                				<h:link styleClass="btn btn-outline-info mb-2 mr-2" outcome="add-user">

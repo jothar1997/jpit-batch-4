@@ -13,7 +13,10 @@ import org.hibernate.annotations.CreationTimestamp;
  */
 @Entity
 @NamedQuery(name = "Users.findAll",query = "SELECT b FROM Users b")
+@NamedQuery(name = "Users.findWithoutMe",query = "SELECT b FROM Users b WHERE b.email <> :email")
 @NamedQuery(name = "User.findEmail",query = "SELECT u.email FROM Users u WHERE u.email=:email AND u.id <> :id")
+@NamedQuery(name = "user.count",query = "SELECT COUNT(u) FROM Users u")
+@NamedQuery(name = "user.findWithEmail",query = "SELECT u FROM Users u WHERE u.email=:email")
 public class Users implements Serializable {
 
 	
@@ -83,11 +86,16 @@ public class Users implements Serializable {
 	private String password;
 	private String phone;
 	private String address;
-	private String accessLevel;
-	public String getAccessLevel() {
+	
+	@Enumerated(EnumType.STRING)
+	private Role accessLevel;
+	public enum Role{
+		Admin,Staff,Customer
+	}
+	public Role getAccessLevel() {
 		return accessLevel;
 	}
-	public void setAccessLevel(String accessLevel) {
+	public void setAccessLevel(Role accessLevel) {
 		this.accessLevel = accessLevel;
 	}
 	@CreationTimestamp

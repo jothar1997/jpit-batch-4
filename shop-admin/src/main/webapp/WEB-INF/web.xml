@@ -16,4 +16,14 @@
     <servlet-name>FacesServlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>Staff and AdminFunctions</web-resource-name>
+  		<url-pattern>/admin/*</url-pattern>
+  	</web-resource-collection>
+  	<auth-constraint>
+  		<role-name>Staff</role-name>
+  		<role-name>Admin</role-name>
+  	</auth-constraint>
+  </security-constraint>
 </web-app>

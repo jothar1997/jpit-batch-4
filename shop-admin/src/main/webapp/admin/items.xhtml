@@ -9,12 +9,25 @@
 	<ui:define name="sub-title">Item</ui:define>
 	<ui:define name="sub-title1">Item Lists</ui:define>
 	<ui:define name="btn-action">
+		<button id="upload" class="btn btn-outline-info  float-right mx-2"><i class="icofont-ui-file" style="margin-right:8px;"></i>File Upload</button>
 		<h:link outcome="add-item" styleClass="btn btn-dark float-right">
-			
 			Add New
 		</h:link>
 	</ui:define>
 	<ui:define name="main-content">
+		<div class="card shadow my-4 p-4 show">
+			<h:form class="form" enctype='multipart/form-data' >
+				<div class="form-group">
+					<label for="">File</label>
+					<h:inputFile value="#{fileUploadBean.file}"  styleClass="form-control-file" >
+							
+					</h:inputFile>
+				</div>
+				<div class="form-group">
+					<h:commandButton  value="Save"  styleClass="btn btn-outline-secondary uploadFile" action="#{fileUploadBean.upload()}" />
+				</div>
+			</h:form>
+		</div>
 		<div class="card shadow mb-4">
            <div class="card-header py-3">
                <h6 class="m-0 font-weight-bold text-primary">Item Table</h6>
@@ -28,11 +41,15 @@
                    	</h:column>
                    	<h:column >
                    		<f:facet name="header">Name</f:facet>
-                   		#{c.name}
+                   		
+                   		<h:link type="button" styleClass="text-secondary showItem">
+                   			<f:param name="id" value="#{c.id}"></f:param>
+                   			#{c.name}
+                   		</h:link>
                    	</h:column>
                    	<h:column >
                    		<f:facet name="header">Price</f:facet>
-                   		#{c.price}
+                   		$#{c.price}
                    	</h:column>
                    	<h:column >
                    		<f:facet name="header">Category</f:facet>
@@ -54,7 +71,7 @@
 		                   			<f:param name="id" value="#{c.id}"></f:param>
 		                   		</i></h:link>
 		                   		<h:form>
-		                   			<h:commandLink styleClass="btn btn-outline-danger" action="#{itemBean.remove(c.id)}" >
+		                   			<h:commandLink  styleClass="btn btn-outline-danger" action="#{itemBean.remove(c.id)}" >
 		                    			<i class="fas fa-minus"></i>
 		                    		</h:commandLink>	
 		                   		</h:form>
@@ -65,7 +82,79 @@
                </div>
            </div>
        </div>
+       <!-- Button trigger modal -->
+		<div id="show" class="">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="d-inline-block">Item Detail</h4>
+					<a href="" class="btn btn-info hide float-right">Back</a>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-md-5">
+						
+						</div>
+						<div class="col-12 col-md-7">
+							<table class="table table-borderless">
+								<tr>
+									<td>Name</td>
+									<td>Man</td>
+								</tr>
+								<tr>
+									<td>Price</td>
+									<td>30</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</ui:define>
-	
+	<ui:define name="js">
+		<script>
+			$(document).ready(function(){
+					$('.show').addClass('d-none');
+					$('#upload').click(function() {
+						//alert('ok');
+						$('.show').toggleClass('d-none');	
+					});
+					$('#form').change(function () {
+						$('.uploadFile').click();
+					});
+					$('#show').addClass("d-none");
+
+					$('.showItem').click(function(){
+						$('#show').toggleClass('d-none');
+						
+					});
+
+					
+				})
+				
+		</script>
+	</ui:define>
+	<!-- Button trigger modal -->
+	<ui:define name="css">
+		<style>
+			#show{
+				width:600px;
+				z-index:100;
+				display:flex;
+				justify-content:center;
+				align-item:center;
+				height:400px;
+				position:absolute;
+				top:100px;
+				left:30%;
+				
+			}
+			#show .card{
+				width:600px;
+			}
+		</style>
+	</ui:define>
+
+
 </ui:composition>
 </html>

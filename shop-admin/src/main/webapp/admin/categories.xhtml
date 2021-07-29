@@ -9,9 +9,9 @@
 	<ui:define name="sub-title">Category</ui:define>
 	<ui:define name="sub-title1">CategoryLists</ui:define>
 	<ui:define name="btn-action">
-		<h:commandLink onclick="$('#edit').modal('show')" styleClass="btn btn-outline-primary float-right">
+		<h:commandLink onclick="$('#edit').modal('show')" styleClass="btn btn-dark float-right">
 			<f:ajax listener="#{categoryBean.retriCat(0)}" render="form"></f:ajax>
-			Add
+			Add New
 		</h:commandLink>
 	</ui:define>
 	<ui:define name="main-content">

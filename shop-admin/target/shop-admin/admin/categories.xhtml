@@ -9,9 +9,9 @@
 	<ui:define name="sub-title">Category</ui:define>
 	<ui:define name="sub-title1">CategoryLists</ui:define>
 	<ui:define name="btn-action">
-		<h:commandLink onclick="$('#edit').modal('show')" styleClass="btn btn-outline-primary float-right">
-			<f:ajax listener="#{categoryBean.retriCat()}" render="form"></f:ajax>
-			Add
+		<h:commandLink onclick="$('#edit').modal('show')" styleClass="btn btn-dark float-right">
+			<f:ajax listener="#{categoryBean.retriCat(0)}" render="form"></f:ajax>
+			Add New
 		</h:commandLink>
 	</ui:define>
 	<ui:define name="main-content">
@@ -83,7 +83,7 @@
 				        			<h:inputText onkeyup="return check()" value="#{categoryBean.category.name}" styleClass="form-control name" id="name" >
 				        				<f:ajax  event="keyup" render="save errMsg" listener="#{categoryBean.checkCategory()}" execute="@form"></f:ajax>
 				        			</h:inputText>
-				        			<small class=" text-danger" >
+				        			<small class="text-danger" >
 				        				<h:outputText value="#{categoryBean.msg}" id="errMsg" style="font-size:12px;" styleClass="something" />
 				        			</small>
 				        		</div>

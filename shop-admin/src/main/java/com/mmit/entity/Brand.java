@@ -15,6 +15,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @NamedQuery(name = "Brand.findAll",query = "SELECT b FROM Brand b")
 @NamedQuery(name="Brand.findName",query = "SELECT b.name FROM Brand b WHERE b.name=:name AND b.id <> :id")
+@NamedQuery(name = "brand.findwithname",query = "SELECT b FROM Brand b WHERE b.name= :name")
 public class Brand implements Serializable {
 
 	

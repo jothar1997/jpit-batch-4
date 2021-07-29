@@ -29,7 +29,7 @@ public class UserBean implements Serializable {
 		return msg;
 	}
 	public List<Users> getUsers(){
-		return service.findAll();
+		return service.findWithoutMe();
 	}
 	@PostConstruct
 	public void init() {

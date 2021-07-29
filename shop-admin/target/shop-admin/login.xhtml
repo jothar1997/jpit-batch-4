@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/frontend-template/frontend-template.xhtml">
+	<ui:define name="title">login</ui:define>
+	<ui:define name="main-content">
+		 <!-- Section -->
+        <section class="min-vh-100 d-flex bg-primary align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6 justify-content-center">
+                        <div class="card bg-primary shadow-soft border-light p-4">
+                            <div class="card-header text-center pb-0">
+                                <h2 class="h4">Sign in to our platform</h2>  
+                            </div>
+                            <div class="card-body">
+                                <h:form>
+                                    <!-- Form -->
+                                    <div class="alert alert-danger my-3 #{empty facesContext.messageList ? 'd-none' : ''}">
+										<h:messages />
+									</div>
+                                    <div class="form-group">
+                                        <label for="">Your email</label>
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+                                            </div>
+                                            <h:inputText value="#{loginBean.email}" styleClass="form-control" p:type="email" >
+                                            
+                                            </h:inputText>
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="form-group">
+                                        <!-- Form -->
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword6">Password</label>
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
+                                                </div>
+                                                <h:inputSecret value="#{loginBean.password}" styleClass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <!-- End of Form -->
+                                        <div class="d-block d-sm-flex justify-content-between align-items-center mb-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck5"></input>
+                                                <label class="form-check-label" for="defaultCheck5">
+                                                  Remember me
+                                                </label>
+                                            </div>
+                                            <div><a href="#" class="small text-right">Lost password?</a></div>
+                                        </div>
+                                    </div>
+                                    <h:commandButton action="#{loginBean.login()}" value="Login" styleClass="btn btn-primary btn-block animate-up-2" />
+                                </h:form>
+                                <div class="mt-3 mb-4 text-center">
+                                    <span class="font-weight-normal">or login with</span>
+                                </div>
+                                <div class="btn-wrapper my-4 text-center">
+                                    <button class="btn btn-primary btn-icon-only text-facebook mr-2" type="button" aria-label="facebook button" title="facebook button">
+                                        <span aria-hidden="true" class="fab fa-facebook-f"></span>
+                                    </button>
+                                    <button class="btn btn-primary btn-icon-only text-twitter mr-2" type="button" aria-label="twitter button" title="twitter button">
+                                        <span aria-hidden="true" class="fab fa-twitter"></span>
+                                    </button>
+                                    <button class="btn btn-primary btn-icon-only text-facebook" type="button" aria-label="github button" title="github button">
+                                        <span aria-hidden="true" class="fab fa-github"></span>
+                                    </button>
+                                </div>
+                                <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
+                                    <span class="font-weight-normal">
+                                        Not registered?
+                                        <a href="#" class="font-weight-bold">Create account</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+	</ui:define>
+</ui:composition> 
+
+</html>

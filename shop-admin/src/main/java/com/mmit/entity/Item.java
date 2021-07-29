@@ -12,6 +12,7 @@ import org.hibernate.annotations.OnDeleteAction;
  */
 @Entity
 @NamedQuery(name = "Item.findAll",query = "SELECT b FROM Item b")
+@NamedQuery(name = "item.findphoto",query = "SELECT b.photo FROM Item b WHERE b.id = :id")
 public class Item implements Serializable {
 
 	
@@ -34,7 +35,20 @@ public class Item implements Serializable {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="brand_id")
 	private Brand brand;
+	
+	@Enumerated(EnumType.STRING)
 	private ClothType type;
+	
+	public enum ClothType{
+		Men,Women
+	}
+	
+	public ClothType getType() {
+		return type;
+	}
+	public void setType(ClothType type) {
+		this.type = type;
+	}
 	public int getId() {
 		return id;
 	}
@@ -71,24 +85,37 @@ public class Item implements Serializable {
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
-	public ClothType getType() {
-		return type;
-	}
-	public void setType(ClothType type) {
-		this.type = type;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public enum ClothType{
-		Male,Female
-	}
+	
 	public Item() {
 		super();
 	}
 	
 	private String photo;
 	
+	@ManyToOne
+	@JoinColumn(name = "user_createdBy")
+	private Users createdBy;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_updatedBy")
+	private Users updatedBy;
+	
+	public Users getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(Users createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Users getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(Users updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 	public String getPhoto() {
 		return photo;
 	}

@@ -17,24 +17,39 @@
 		<div class="container">
 			<div class="card">
 				<div class="card-body">
-					<h:form styleClass="form">
+					<h:form styleClass="form" id="form">
 						<div class="form-group">
 							<label for="">Name</label> 
 							<h:inputText value="#{userBean.user.name}" styleClass="form-control" />
 						</div>
-						<div class="form-group">
+						<div class="#{userBean.user.id == 0? 'd-block' : 'd-none'}">
+							<div class="form-group">
 							<label for="">Email</label> 
-							<h:inputText p:type="email" value="#{userBean.user.email}" styleClass="form-control" />
+							<h:inputText p:type="email" value="#{userBean.user.email}" styleClass="form-control" id="email">
+								<f:ajax event="keyup" render="errMsg" listener="#{userBean.checkEmail()}" execute="@form"></f:ajax>
+							</h:inputText>
+							<small>
+								<h:outputText value="#{userBean.msg}" id="errMsg" styleClass="text-danger" /><br></br>
+								<h:message for="email" styleClass="text-danger"></h:message>
+							</small>
 						</div>
 						<div class="form-group">
 							<label for="">Password</label> 
 							<h:inputText p:type="password" value="#{userBean.user.password}" styleClass="form-control" />
 						</div>
+						</div>
 						<div class="form-group">
 							<label for="">Phone</label> 
 							<h:inputText p:type="number" value="#{userBean.user.phone}" styleClass="form-control" />
 						</div>
-						<div class="form-group">
+						<h:panelGroup styleClass="form-group" rendered="#{userBean.user.id == 0 and userBean.user.id != loginBean.loginuser.id}">
+							<label for="">Access Level</label>
+							<h:selectOneMenu styleClass="form-control" value="#{userBean.user.accessLevel}">
+								<f:selectItem itemLabel="Admin" itemValue="Admin" />
+								<f:selectItem itemLabel="Staff" itemValue="Staff" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+						<div class="form-group mt-2">
 							<label for="">Address</label>
 							<h:inputTextarea value="#{userBean.user.address}" styleClass="form-control" />
 						</div>

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/frontend-template/frontend-template.xhtml">
+	<ui:define name="title">Detail</ui:define>
+	<ui:define name="main-content">
+		<section class="section section-lg pt-0">
+            <div class="container">
+                <div class="row align-items-center justify-content-around">
+                    <div class="col-md-6 col-xl-6 mb-5">
+                        <div class="card bg-primary shadow-soft border-light organic-radius p-3">
+                            <h:graphicImage library="uploads" name="#{itemBean.item.photo}" styleClass="organic-radius img-fluid"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-5 text-center text-md-left">
+                        <h2 class="h1 mb-4">#{itemBean.item.name}</h2>
+                        <table class="table table-borderless">
+                       
+                        	<tr>
+                        		<th>Name</th>
+                        		<td>#{itemBean.item.name}</td>
+                        	</tr>
+                        	<tr>
+                        		<th>Price</th>
+                        		<td>$ #{itemBean.item.price}</td>
+                        	</tr>
+                        	<tr>
+                        		<th>Brand</th>
+                        		<td>#{itemBean.item.brand.name}</td>
+                        	</tr>
+                        	<tr>
+                        		<th>Category</th>
+                        		<td>#{itemBean.item.category.name}</td>
+                        	</tr>
+                        	<tr>
+                        		<th>Type</th>
+                        		<td>#{itemBean.item.type}</td>
+                        	</tr>
+                        	<tr>
+                        		<th>Description</th>
+                        		<td>
+                        			<p>#{itemBean.item.description}</p>
+                        		</td>
+                        	</tr>
+                        	<tr>
+                        		<td></td>
+                        		<td>
+                        			 <a href="#" class="btn btn-primary text-info float-right ml-2 animate-up-2"><i class="fas fa-cart-plus mr-2"></i>Add To Cart</a>
+                            		<h:link outcome="index" styleClass="btn btn-primary text-success float-right animate-up-2"><i class="fas fa-backward mr-2"></i>View More</h:link>
+                        		</td>
+                        	</tr>
+                        
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+	
+	</ui:define>
+</ui:composition>
+</html>

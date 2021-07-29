@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/frontend-template/frontend-template.xhtml">
+	<ui:define name="title">Check In</ui:define>
+	<ui:define name="main-content">
+		<div class="container my-5 rounded">
+			<table class="table shadow-soft rounded table-striped">
+				<tr>
+					<th>#</th>
+					<th>Item</th>
+					<th>Price</th>
+					<th>SubQty</th>
+					<th>SubTotal</th>
+				</tr>
+				<tr>
+					<td>
+						<a href="" class="btn btn-primary text-danger animate-up-2"><i class="fas fa-minus-circle"></i></a>
+					</td>
+					<td>Man Cloths</td>
+					<td>$4.00</td>
+					<td>4</td>
+					<td>$16.00</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="" class="btn btn-primary text-danger animate-up-2"><i class="fas fa-minus-circle"></i></a>
+					</td>
+					<td>Man Cloths</td>
+					<td>$4.00</td>
+					<td>4</td>
+					<td>$16.00</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="" class="btn btn-primary text-danger animate-up-2"><i class="fas fa-minus-circle"></i></a>
+					</td>
+					<td>Man Cloths</td>
+					<td>$4.00</td>
+					<td>4</td>
+					<td>$16.00</td>
+				</tr>
+			</table>
+			<div class="row">
+				<div class="col-12 col-md-4 offset-md-8">
+					<div class="d-flex justify-content-end">
+						<div class="mr-4" style="display:flex;justify-content:center;align-item:center;">
+							<span class="mt-2">Total: <span>$50</span></span>
+						</div>
+						<div>	
+							<a href="" class="btn btn-primary animate-up-2 text-success">Check Out</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
