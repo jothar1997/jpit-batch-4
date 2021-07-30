@@ -68,7 +68,11 @@ public class LoginBean implements Serializable {
 		try {
 			AuthenticationStatus status = secContext.authenticate(req, resp, AuthenticationParameters.withParams().credential(cred));
 			if(status == AuthenticationStatus.SUCCESS) {
-				return "/admin/dashboard?faces-redirect=true";
+				if(loginuser.getAccessLevel() == Role.Admin || loginuser.getAccessLevel() == Role.Staff) {
+					return "/admin/dashboard?faces-redirect=true";
+				}else {
+					return "/index?faces-redirect=true";
+				}
 			}
 			
 		} catch (AppException e) {
@@ -78,7 +82,7 @@ public class LoginBean implements Serializable {
 	}
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "index?faces-redirect=true";
+		return "/index?faces-redirect=true";
 	}
 
 }

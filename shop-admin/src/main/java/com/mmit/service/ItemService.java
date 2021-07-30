@@ -42,4 +42,14 @@ public class ItemService {
 				.setParameter("id", id).getSingleResult();
 				
 	}
+	public List<Item> findByCategoryId(int id) {
+		
+		return em.createNamedQuery("item.findwithcategoryid", Item.class)
+				.setParameter("cid", id).getResultList();
+	}
+	public List<Item> findByBrandId(int id) {
+		// TODO Auto-generated method stub
+		return em.createNamedQuery("item.findwithbrandid", Item.class)
+				.setParameter("bid", id).getResultList();
+	}
 }	

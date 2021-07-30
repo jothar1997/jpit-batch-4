@@ -55,4 +55,9 @@ public class CategoryService {
 		}
 		return null;
 	}
+	public String findWithIdToGetName(int id) {
+		
+		return em.createNamedQuery("category.findname", String.class)
+				.setParameter("cid", id).getSingleResult();
+	}
 }

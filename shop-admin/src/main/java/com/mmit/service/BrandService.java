@@ -56,4 +56,9 @@ public class BrandService {
 		}
 		return null;
 	}
+	public String findWithIdToGetName(int id) {
+		
+		return em.createNamedQuery("brand.findname", String.class)
+				.setParameter("bid", id).getSingleResult();
+	}
 }

@@ -13,6 +13,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @NamedQuery(name = "Item.findAll",query = "SELECT b FROM Item b")
 @NamedQuery(name = "item.findphoto",query = "SELECT b.photo FROM Item b WHERE b.id = :id")
+@NamedQuery(name = "item.findwithcategoryid",query = "SELECT b FROM Item b WHERE b.category.id = :cid")
+@NamedQuery(name = "item.findwithbrandid",query = "SELECT b FROM Item b WHERE b.brand.id = :bid")
 public class Item implements Serializable {
 
 	

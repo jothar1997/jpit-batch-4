@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/frontend-template/frontend-template.xhtml">
+	<ui:define name="title">Setting</ui:define>
+	<ui:define name="main-content">
+		<div class="container" style="margin-top: 135px;">
+			<form action="">
+				<input type="text" value="#{customerRegisterBean.check}" class="check d-none"/>
+			</form>
+			<div class="row">
+				<div class="col-12 col-md-4">
+					<div class="card bg-primary shadow-inset border-light">
+						<div class="card-header">
+							<h4>Information Setting</h4>
+						</div>
+						<div class="card-body">
+							<button   class="btn btn-primary btn-block profile">User Profile</button>
+							<button   class="btn btn-primary btn-block password">Change Password</button>
+							<button   class="btn btn-primary btn-block info">Change Information</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-8">
+					<div class="row">
+						<div class="col-12 profileShow">
+							<!-- Profile Card -->
+			                <div class="profile-card mb-5">
+			                    <div class="card bg-primary shadow-soft border-light">
+			                        <div class="profile-image bg-primary shadow-inset border border-light rounded-circle p-3 ml-3 mt-n5">
+			                            
+			                            <h:graphicImage library="assets" name="img/team/profile-picture-1.jpg" styleClass="card-img-top rounded-circle" />
+			                        </div>
+			                        <div class="card-body">
+			                            <h3 class="h5 mb-2">#{loginBean.loginuser.name}</h3>
+			                            <span class="h6 font-weight-normal text-gray mb-3">#{loginBean.loginuser.phone}</span>
+			                            <ul class="list-unstyled d-flex my-3">
+			                                <li>
+			                                    <a href="#" target="_blank" aria-label="facebook social link" class="icon icon-xs icon-facebook mr-3 text-info">
+			                                        <span class="fab fa-facebook-f"></span>
+			                                    </a>
+			                                </li>
+			                                <li>
+			                                    <a href="#" target="_blank" aria-label="twitter social link" class="icon icon-xs icon-twitter mr-3 text-success">
+			                                        <span class="fab fa-twitter"></span>
+			                                    </a>
+			                                </li>
+			                                <li>
+			                                    <a href="#" target="_blank" aria-label="slack social link" class="icon icon-xs icon-slack mr-3 text-secondary">
+			                                        <span class="fab fa-slack-hash"></span>
+			                                    </a>
+			                                </li>
+			                                <li>
+			                                    <a href="#" target="_blank" aria-label="dribbble social link" class="icon icon-xs icon-dribbble mr-3 text-warning">
+			                                        <span class="fab fa-dribbble"></span>
+			                                    </a>
+			                                </li>
+			                            </ul>
+			                            <p class="card-text">
+			                            	<span>#{loginBean.loginuser.email}</span>,
+			                            	<span>#{loginBean.loginuser.address}</span>
+			                            </p>
+			                        </div>
+			                    </div>
+			                </div>
+			                <!-- End of Profile Card -->
+						</div>
+						<div class="col-12 changePas">
+							<div class="card bg-primary border-light shadow-soft">
+								<div class="card-header">
+									<h4>Change Password</h4>
+								</div>
+								<div class="card-body">
+									<h:form styleClass="form">
+										<div class="alert alert-danger my-3 #{empty facesContext.messageList ? 'd-none' : ''}">
+											<h:messages />
+										</div>
+										<div class="form-group">
+											<label for="">Current Password</label>
+											<h:inputSecret value="#{changePasswordBean.currentPsw}" styleClass="form-control" />
+										</div>
+										<div class="form-group">
+											<label for="">New Password</label>
+											<h:inputSecret value="#{changePasswordBean.newPsw}" styleClass="form-control" />
+										</div>
+										<div class="form-group">
+											<label for="">Confirm Password</label>
+											<h:inputSecret value="#{changePasswordBean.confirmPsw}" styleClass="form-control" />
+										</div>
+										<div class="form-group">
+											<h:commandButton action="#{changePasswordBean.changePsw()}"  value="Change" styleClass="btn btn-primary text-danger" />
+										</div>
+									</h:form>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 changeInfo">
+							<div class="card shadow-soft border-light bg-primary">
+								<div class="card-header">
+									<h4>Change Information</h4>
+								</div>
+								<div class="card-body">
+									<h:form styleClass="form">
+										
+										<div class="form-group">
+											<label for="">Name</label>
+											<h:inputText styleClass="form-control" value="#{customerChangeInfoBean.user.name}"></h:inputText>
+										</div>
+										<div class="form-group">
+											<label for="">Phone</label>
+											<h:inputText styleClass="form-control" value="#{customerChangeInfoBean.user.phone}"></h:inputText>
+										</div>
+										<div class="form-group">
+											<label for="">Address</label>
+											<h:inputText styleClass="form-control" value="#{customerChangeInfoBean.user.address}"></h:inputText>
+										</div>
+										<div>
+											<h:commandButton action="#{customerChangeInfoBean.update()}" value="Update" styleClass="btn btn-primary text-danger" />
+										</div>
+											
+									</h:form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+	<ui:define name="js">
+		<script>
+			$(document).ready(function(){
+				 
+				 if($('.check').val() == 1){
+						 $('.profileShow').show();
+						 $('.changePas').hide();
+						 $('.changeInfo').hide();	
+				}else{
+					$('.profileShow').hide();
+					 $('.changePas').show();
+					 $('.changeInfo').hide();
+
+				}
+				 $('.profile').click(function(){
+					 $('.profileShow').show(1000);
+					 $('.changePas').hide(500);
+					 $('.changeInfo').hide(500);	 
+				});
+				
+				 $('.password').click(function(){
+					 $('.profileShow').hide(500);
+					 $('.changePas').show(1000);
+					 $('.changeInfo').hide(500);
+					 
+				});
+				 $('.info').click(function(){
+					 $('.profileShow').hide(500);
+					 $('.changePas').hide(500);
+					 $('.changeInfo').show(1000); 
+				});
+				
+			});
+		</script>
+	</ui:define>
+</ui:composition>
+</html>
