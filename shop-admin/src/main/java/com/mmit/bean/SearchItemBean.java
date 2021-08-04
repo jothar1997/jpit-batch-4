@@ -68,7 +68,7 @@ public class SearchItemBean implements Serializable {
 		ExternalContext cxt = FacesContext.getCurrentInstance().getExternalContext();
 		String cId = cxt.getRequestParameterMap().get("categoryId");
 		String bId = cxt.getRequestParameterMap().get("brandId");
-			items = new ArrayList<Item>();
+		items = new ArrayList<Item>();
 		if(cId != null) {
 			items = service.findByCategoryId(Integer.parseInt(cId));
 			message = "Category";

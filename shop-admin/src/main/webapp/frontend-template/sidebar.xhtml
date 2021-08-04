@@ -59,7 +59,7 @@
             </div>
            	<div class="navbar-collapse collapse justify-content-end">
            		<ul class="navbar-nav navbar-nav-hover">
-           			<h:panelGroup rendered="#{empty loginBean.loginuser}">
+           			<h:panelGroup rendered="#{loginBean.loginuser.id == 0}">
            				<li class="nav-item">
 	                    	<h:link outcome="/login" styleClass="btn btn-primary text-info"><i class="far fa-user-circle"></i></h:link>
 	                    </li>
@@ -67,7 +67,7 @@
 	                    	<h:link styleClass="btn btn-primary text-success" outcome="/customer-register"><i class="fas fa-user-plus"></i></h:link>
 	                    </li>
            			</h:panelGroup>
-           			<h:panelGroup rendered="#{!empty loginBean.loginuser}">
+           			<h:panelGroup rendered="#{loginBean.loginuser.id != 0}">
            				<li class="nav-item dropdown">
            					<a href="" class="btn btn-primary p-2 px-3 nav-link" data-toggle="dropdown" >
 	                            
@@ -79,6 +79,12 @@
 	                        		<h:link outcome="customer-setting">
 	                        			<f:param value="1" name="profile"></f:param>
 	                        			<i class="far fa-user-circle mr-2 text-success"></i>Profile
+	                        		</h:link>
+								</li>
+								<li class="dropdown-item">
+									<h:link outcome="customer-setting">
+	                        			<f:param value="2" name="orderhistory"></f:param>
+	                        			<i class="fas fa-clipboard-list mr-2 text-danger"></i>OrderHistory
 	                        		</h:link>
 								</li>
 	                        	<li class="dropdown-item"><a href="customer-setting.xhtml"><i class="fas fa-user-cog mr-2 text-danger"></i>Setting</a></li>
@@ -95,7 +101,10 @@
            				</li>
            			</h:panelGroup>
                      <li class="nav-item">
-                    	<h:link styleClass="btn btn-primary text-warning" outcome="/checkin"><i class="fas fa-cart-plus"></i></h:link>
+                    	<h:link styleClass="btn btn-primary text-warning" outcome="/checkin"><i class="fas fa-cart-plus"></i> </h:link>
+                    </li>
+                    <li class="nav-item">
+                    	<h:outputText value="#{shopBean.itemCount}" id="count" styleClass="btn btn-primary btn-pill text-secondary #{shopBean.itemCount==0? 'd-none' : ''}" />
                     </li>
            		</ul>
            	</div>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/template/admin-template.xhtml">
+	<ui:define name="title">orderdetail</ui:define>
+	<ui:define name="sub-title">Order</ui:define>
+	<ui:define name="sub-title1">Order Detail</ui:define>
+	<ui:define name="btn-action">
+		<h:link outcome="/admin/dashboard" styleClass="btn btn-dark float-right">
+			Back
+		</h:link>
+	</ui:define>
+	<ui:define name="main-content">
+			<div class="container my-5">	
+				<div class="card p-5">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-12 col-md-5">
+								<div class="card my-3">
+									<div class="card-body">
+										<h4 class="text-primary">Receiver Information</h4>
+										<table class="table table-borderless">
+											
+											<tr>
+												<th>Name :</th>
+												<td>#{orderBean.order.delivery.receiverName}</td>
+											</tr>
+											<tr>
+												<th>Phone :</th>
+												<td>#{orderBean.order.delivery.receiverPhone}</td>
+											</tr>
+											<tr>
+												<th>Address:</th>
+												<td>#{orderBean.order.delivery.receiverAddress}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 offset-md-2 col-md-5">
+								<div class="card my-3">
+									<div class="card-body">
+										<h4 class="text-primary">Order Information</h4>
+										<table class="table table-borderless">
+											<tr>
+												<th>OrderDate :</th>
+												<td>#{orderBean.order.orderDate}</td>
+											</tr>
+											<tr>
+												<th>Total :</th>
+												<td>$ #{orderBean.order.total}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<h:dataTable binding="#{tb}" styleClass="table table-striped table-bordered" value="#{orderBean.order.details}" var="c">
+									<h:column >
+				                        <f:facet name="header">No</f:facet>
+				                        #{tb.rowIndex+1}
+				                    </h:column>
+									<h:column>
+										<f:facet name="header">Item Name</f:facet>
+										#{c.item.name}
+									</h:column>
+									<h:column>
+										<f:facet name="header">Item Price</f:facet>
+										$ #{c.item.price}
+									</h:column>
+									<h:column>
+										<f:facet name="header">SubQty</f:facet>
+										#{c.subQty}
+									</h:column>
+									<h:column>
+										<f:facet name="header">SubPrice</f:facet>
+										$ #{c.subPrice}
+									</h:column>
+								</h:dataTable>
+							</div>
+						</div>
+											
+					</div>
+				</div>
+			
+			</div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -8,55 +8,66 @@
 	<ui:define name="title">Check In</ui:define>
 	<ui:define name="main-content">
 		<div class="container my-5 rounded">
-			<table class="table shadow-soft rounded table-striped">
-				<tr>
-					<th>#</th>
-					<th>Item</th>
-					<th>Price</th>
-					<th>SubQty</th>
-					<th>SubTotal</th>
-				</tr>
-				<tr>
-					<td>
-						<a href="" class="btn btn-primary text-danger animate-up-2"><i class="fas fa-minus-circle"></i></a>
-					</td>
-					<td>Man Cloths</td>
-					<td>$4.00</td>
-					<td>4</td>
-					<td>$16.00</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="" class="btn btn-primary text-danger animate-up-2"><i class="fas fa-minus-circle"></i></a>
-					</td>
-					<td>Man Cloths</td>
-					<td>$4.00</td>
-					<td>4</td>
-					<td>$16.00</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="" class="btn btn-primary text-danger animate-up-2"><i class="fas fa-minus-circle"></i></a>
-					</td>
-					<td>Man Cloths</td>
-					<td>$4.00</td>
-					<td>4</td>
-					<td>$16.00</td>
-				</tr>
-			</table>
+			<div class="card bg-primary shadow-soft my-3">
+				<div class="card-body">
+					<h4 class="d-inline-block text-danger">Cart Table</h4>
+					<h:link outcome="index" styleClass="btn btn-primary text-success float-right animate-up-2"><i class="fas fa-backward mr-2"></i>View More</h:link>
+					
+				</div>
+			</div>
+			<h:form id="form">
+			<h:dataTable styleClass="table shadow-soft rounded table-striped #{!empty shopBean.order.details ? '' : 'd-none'}" value="#{shopBean.order.details}" var="od">
+				<h:column>
+					<f:facet name="header">#</f:facet>
+					
+						
+						<h:commandLink action="#{shopBean.removeFromCart(od)}" styleClass="btn btn-primary text-danger animate-up-2">
+							<i class="fas fa-minus-circle"></i>
+						</h:commandLink>
+					
+				</h:column>
+				<h:column>
+					<f:facet name="header">Name</f:facet>
+					#{od.item.name}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Price</f:facet>
+					$#{od.item.price}
+				</h:column>
+				<h:column>
+					<f:facet name="header">SubQty</f:facet>
+					<h:inputText  value="#{od.subQty}" styleClass="form-control shadow-inset subQty" p:type="number" style="width:120px;">
+						<f:ajax  listener="#{shopBean.updateCart(od.item.id)}" execute="@this" render="@form total subtotal"></f:ajax>
+					</h:inputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">SubTotal</f:facet>
+					<span id="subtotal">$#{od.subPrice}</span>
+				</h:column>
+			</h:dataTable>
+			<div>
+				<div class="card border-light shadow-soft #{empty shopBean.order.details ? '' : 'd-none'} p-5 my-3">
+					<h3 class="text-center text-secondary">There is not item the cart. Shop Now</h3>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-12 col-md-4 offset-md-8">
 					<div class="d-flex justify-content-end">
 						<div class="mr-4" style="display:flex;justify-content:center;align-item:center;">
-							<span class="mt-2">Total: <span>$50</span></span>
+							<span class="mt-2">Total: <span id="total">$#{shopBean.order.totalAmount}</span></span>
 						</div>
 						<div>	
-							<a href="" class="btn btn-primary animate-up-2 text-success">Check Out</a>
+							<h:link styleClass="btn btn-primary  #{!empty shopBean.order.details ? 'text-success animate-up-2' :'text-muted'}" outcome="checkout" disabled="#{empty shopBean.order.details ? 'true' : 'false'}">Shipping Address</h:link>
 						</div>
 					</div>
 				</div>
 			</div>
+			</h:form>
+			
 		</div>
+	</ui:define>
+	<ui:define name="js">
+		
 	</ui:define>
 </ui:composition>
 </html>

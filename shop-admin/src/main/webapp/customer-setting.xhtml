@@ -19,6 +19,7 @@
 						</div>
 						<div class="card-body">
 							<button   class="btn btn-primary btn-block profile">User Profile</button>
+							<button   class="btn btn-primary btn-block order">Order History</button>
 							<button   class="btn btn-primary btn-block password">Change Password</button>
 							<button   class="btn btn-primary btn-block info">Change Information</button>
 						</div>
@@ -97,6 +98,40 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-12 orderHistory">
+							<div class="card shadow-soft border-light bg-primary">
+								<div class="card-header">
+									<h4>Order History</h4>
+								</div>
+								<div class="card-body ordertable">
+									<h:dataTable binding="#{tb}" styleClass="table shadow-inset border-light" value="#{customerChangeInfoBean.orders}" var="c">
+										<h:column>
+											<f:facet name="header">#</f:facet>
+											#{tb.rowIndex+1}
+										</h:column>
+										<h:column>
+											<f:facet name="header">Order Date</f:facet>
+											#{c.orderDate}
+										</h:column>
+											<h:column>
+											<f:facet name="header">Order Status</f:facet>
+											#{c.status}
+										</h:column>
+										<h:column>
+											<f:facet name="header">Total</f:facet>
+											$ #{c.total}
+										</h:column>
+										<h:column>
+											<f:facet name="header">Action</f:facet>
+											<h:link styleClass="btn btn-sm text-secondary btn-primary" outcome="customer-orderdetail">
+												<f:param name="order" value="#{c.id}"></f:param>
+												<i class="fas fa-info-circle mr-2"></i>Detail
+											</h:link>
+										</h:column>
+									</h:dataTable>
+								</div>
+							</div>
+						</div>
 						<div class="col-12 changeInfo">
 							<div class="card shadow-soft border-light bg-primary">
 								<div class="card-header">
@@ -138,29 +173,47 @@
 						 $('.profileShow').show();
 						 $('.changePas').hide();
 						 $('.changeInfo').hide();	
+						 $('.orderHistory').hide();
+				}else if($('.check').val() == 2){
+					 $('.orderHistory').show();
+					 $('.profileShow').hide();
+					 $('.changePas').hide();
+					 $('.changeInfo').hide();
 				}else{
-					$('.profileShow').hide();
+					 $('.orderHistory').hide();
+					 $('.profileShow').hide();
 					 $('.changePas').show();
 					 $('.changeInfo').hide();
-
 				}
 				 $('.profile').click(function(){
 					 $('.profileShow').show(1000);
 					 $('.changePas').hide(500);
-					 $('.changeInfo').hide(500);	 
+					 $('.changeInfo').hide(500);
+					 $('.orderHistory').hide(1000);	 
 				});
 				
 				 $('.password').click(function(){
 					 $('.profileShow').hide(500);
 					 $('.changePas').show(1000);
 					 $('.changeInfo').hide(500);
+					 $('.orderHistory').hide(1000);
 					 
 				});
 				 $('.info').click(function(){
 					 $('.profileShow').hide(500);
 					 $('.changePas').hide(500);
 					 $('.changeInfo').show(1000); 
+					 $('.orderHistory').hide(1000);
 				});
+				 $('.order').click(function(){
+					 $('.profileShow').hide(500);
+					 $('.changePas').hide(500);
+					 $('.changeInfo').hide(500); 
+					 $('.orderHistory').show(1000);
+				});
+					$('.detailShow').click(function(){
+						alert('ok');
+						})
 				
 			});
 		</script>

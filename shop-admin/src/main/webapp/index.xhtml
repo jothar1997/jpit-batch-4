@@ -136,8 +136,14 @@
 	                        <h3 class="h5 card-title mt-4">#{i.name}</h3>
 	                        <p class="card-text">#{i.description}</p>
 	                        <div class="">
-	                            <a href="#" class="btn btn-primary text-info float-right ml-2 animate-up-2"><i class="fas fa-cart-plus mr-2"></i>Add To Cart</a>
-	                            
+	                           
+	                            <h:form>
+	                            	<h:commandLink action="#{shopBean.addToCart(i.id)}" styleClass="btn btn-primary text-info float-right ml-2 animate-up-2" >
+	                            		<i class="fas fa-cart-plus mr-2"></i>Add To Cart
+	                            		
+	                            		<f:ajax render="count"></f:ajax>
+	                            	</h:commandLink>
+	                            </h:form>
 	                            <h:link styleClass="btn btn-primary text-success float-right animate-up-2" outcome="product-detail">
 	                            	<f:param name="id" value="#{i.id}"></f:param>
 	                            	<i class="fas fa-eye mr-2"></i>Detail

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<ui:composition template="/frontend-template/frontend-template.xhtml">
+	<ui:define name="title">checkout</ui:define>
+	<ui:define name="main-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-8">
+					<div class="card shadow-soft border-light">
+						<div class="card-header">
+							<h4 class="d-inline-block">Shipping Information</h4>
+						</div>
+						<div class="card-body">
+							<h:form>
+								<div class="form-group">
+									<label for="">Receiver Name</label>
+									<h:inputText value="#{placeOrderBean.name}" styleClass="form-control"></h:inputText>
+								</div>
+								<div class="form-group">
+									<label for="">Receiver Phone</label>
+									<h:inputText value="#{placeOrderBean.phone}" styleClass="form-control"></h:inputText>
+								</div>
+								<div class="form-group">
+									<label for="">Receiver Address</label>
+									<h:inputText value="#{placeOrderBean.address}" styleClass="form-control"></h:inputText>
+								</div>
+								<div class="form-group">
+									<h:link styleClass="btn btn-primary text-muted mr-2" outcome="checkin">Back</h:link>
+									<h:commandLink action="#{placeOrderBean.placeOrder()}" styleClass="btn btn-primary text-secondary">Place Order</h:commandLink>
+								</div>
+							</h:form>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-4">
+					<div class="card shadow-soft border-light">
+						<div class="card-header">
+							<h4 class="text-secondary">Order Summary</h4>
+						</div>
+						<div class="card-body">
+							<h:dataTable styleClass="table shadow-inset" value="#{shopBean.order.details}" var="c">
+								<h:column>
+									<f:facet name="header">Product</f:facet>
+									#{c.item.name}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Qty</f:facet>
+									#{c.subQty}
+								</h:column>
+								<h:column>
+									<f:facet name="header">SubPrice</f:facet>
+									$ #{c.subPrice}
+								</h:column>
+							</h:dataTable>
+							<div class="text-right">
+								<span class="mr-2">Total:</span>
+								$ #{shopBean.order.totalAmount}
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

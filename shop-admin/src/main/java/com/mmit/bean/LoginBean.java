@@ -3,6 +3,7 @@ package com.mmit.bean;
 import java.io.Serializable;
 import java.net.http.HttpRequest;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -83,6 +84,10 @@ public class LoginBean implements Serializable {
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/index?faces-redirect=true";
+	}
+	@PostConstruct
+	public void init() {
+		loginuser = new Users();
 	}
 
 }

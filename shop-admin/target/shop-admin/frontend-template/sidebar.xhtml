@@ -15,30 +15,96 @@
             <div class="navbar-collapse collapse justify-content-center" id="navbar_global">
                 <ul class="navbar-nav navbar-nav-hover">
                     <li class="nav-item">
-                        <a href="#home" class="btn btn-primary">Home</a>
+                        <a href="#home" class=" nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="btn btn-primary">About</a>
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="" class="nav-link" data-toggle="dropdown" >
+                            <span class="nav-link-inner-text">Product</span>
+                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
+                        </a>
+                        <ul class="dropdown-menu pl-1" style="width: 300px;" >
+                            <div class="row">
+                            	<div class="col-6">
+                            		<h4>Category</h4>
+                            		<ui:repeat var="c" value="#{categoryBean.categories}">
+                            			<li>
+                            				<h:link styleClass="dropdown-item" outcome="search-item">
+                            					<f:param name="categoryId" value="#{c.id}"></f:param>
+                            					#{c.name}
+                            				</h:link>
+                            			</li>
+                            		</ui:repeat>
+                            	</div>
+                            	<div class="col-6">
+                            		<h4>Brand</h4>
+                            		<ui:repeat var="c" value="#{brandBean.brands}">
+                            			<li>
+                            				<h:link styleClass="dropdown-item" outcome="search-item">
+                            					<f:param name="brandId" value="#{c.id}"></f:param>
+                            					#{c.name}
+                            				</h:link>
+                            			</li>
+                            		</ui:repeat>
+                            	</div>
+                            </div>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#product" class="btn btn-primary">Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="btn btn-primary">Contact</a>
+                        <a href="#contact" class="nav-link ">Contact</a>
                     </li>
                 </ul>
             </div>
            	<div class="navbar-collapse collapse justify-content-end">
            		<ul class="navbar-nav navbar-nav-hover">
-           			<li class="nav-item">
-                    	<h:link outcome="/login" styleClass="btn btn-primary text-info"><i class="far fa-user-circle"></i></h:link>
+           			<h:panelGroup rendered="#{loginBean.loginuser.id == 0}">
+           				<li class="nav-item">
+	                    	<h:link outcome="/login" styleClass="btn btn-primary text-info"><i class="far fa-user-circle"></i></h:link>
+	                    </li>
+	                    <li class="nav-item">
+	                    	<h:link styleClass="btn btn-primary text-success" outcome="/customer-register"><i class="fas fa-user-plus"></i></h:link>
+	                    </li>
+           			</h:panelGroup>
+           			<h:panelGroup rendered="#{loginBean.loginuser.id != 0}">
+           				<li class="nav-item dropdown">
+           					<a href="" class="btn btn-primary p-2 px-3 nav-link" data-toggle="dropdown" >
+	                            
+	                            <span>#{loginBean.loginuser.name}</span>
+	                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
+	                        </a>
+	                        <ul class="dropdown-menu">
+	                        	<li class="dropdown-item">
+	                        		<h:link outcome="customer-setting">
+	                        			<f:param value="1" name="profile"></f:param>
+	                        			<i class="far fa-user-circle mr-2 text-success"></i>Profile
+	                        		</h:link>
+								</li>
+								<li class="dropdown-item">
+									<h:link outcome="customer-setting">
+	                        			<f:param value="2" name="orderhistory"></f:param>
+	                        			<i class="fas fa-clipboard-list mr-2 text-danger"></i>OrderHistory
+	                        		</h:link>
+								</li>
+	                        	<li class="dropdown-item"><a href="customer-setting.xhtml"><i class="fas fa-user-cog mr-2 text-danger"></i>Setting</a></li>
+	                        	<li class="dropdown-item">
+	                        		
+	                        		<h:form>
+	                        			<h:commandLink action="#{loginBean.logout()}" >
+	                        				<i class="fas fa-sign-out-alt mr-2 text-info"></i>Logout
+	                        			</h:commandLink>
+	                        		</h:form>
+	                        	</li>
+	                        	
+	                        </ul>
+           				</li>
+           			</h:panelGroup>
+                     <li class="nav-item">
+                    	<h:link styleClass="btn btn-primary text-warning" outcome="/checkin"><i class="fas fa-cart-plus"></i> </h:link>
                     </li>
                     <li class="nav-item">
-                    	
-                    	<h:link styleClass="btn btn-primary text-success" outcome="/customer-register"><i class="fas fa-user-plus"></i></h:link>
-                    	</li>
-                     <li class="nav-item">
-                    	<h:link styleClass="btn btn-primary text-warning" outcome="/checkin"><i class="fas fa-cart-plus"></i></h:link>
+                    	<h:outputText value="#{shopBean.itemCount}" id="count" styleClass="btn btn-primary btn-pill text-secondary #{shopBean.itemCount==0? 'd-none' : ''}" />
                     </li>
            		</ul>
            	</div>

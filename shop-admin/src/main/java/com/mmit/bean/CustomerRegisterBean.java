@@ -33,9 +33,13 @@ public class CustomerRegisterBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		usernew = new Users();
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("profile");
-		if(id != null) {
-			check = Integer.parseInt(id);
+		String profileid = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("profile");
+		String orderhistory = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("orderhistory");
+		if(profileid != null) {
+			check = Integer.parseInt(profileid);
+		}
+		if(orderhistory !=null) {
+			check = Integer.parseInt(orderhistory);
 		}
 	}
 	public int getCheck() {

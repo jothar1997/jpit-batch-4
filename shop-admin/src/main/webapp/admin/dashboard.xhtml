@@ -5,6 +5,58 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
 <ui:composition template="/template/admin-template.xhtml">
-	
+	<ui:define name="title">Dashboard</ui:define>
+	<ui:define name="sub-title">Order</ui:define>
+	<ui:define name="sub-title1">OrderlistLists</ui:define>
+	<ui:define name="main-content">
+			<div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">Order Table</h6>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                      <h:form>
+                          <h:dataTable binding="#{tb}" styleClass="table table-bordered" id="dataTable" value="#{orderBean.orders}" var="c" width="100%" cellspacing="0" >
+                          	<h:column >
+                          		<f:facet name="header">No</f:facet>
+                          		#{tb.rowIndex+1}
+                          	</h:column>
+                          	<h:column >
+                          		<f:facet name="header">Order Date</f:facet>
+                          		#{c.orderDate}
+                          	</h:column>
+                          	<h:column >
+                          		<f:facet name="header">Status</f:facet>
+                          		
+                          		<h:outputText value="#{c.status}" styleClass="btn btn-sm btn-primary" rendered="#{c.status == 'Pending'}" />
+                          		<h:outputText value="#{c.status}" styleClass="btn btn-sm btn-success" rendered="#{c.status == 'Receive'}" />
+                          		<h:outputText value="#{c.delivery.deliveryDate}" styleClass="btn btn-sm btn-info" rendered="#{c.status == 'Deliver'}" />
+                          	</h:column>
+                          	<h:column >
+                          		<f:facet name="header">Total</f:facet>
+                          		$ #{c.total}
+                          	</h:column>
+                          	<h:column>
+                          		<f:facet name="header">Action</f:facet>
+	                           		<h:link styleClass="btn btn-outline-info mr-2" outcome="/admin/admin-orderdetail">
+	                           			<f:param name="orderid" value="#{c.id}"></f:param>
+	                           			<i class="fas fa-info-circle"></i>
+	                           		</h:link>
+                          			<h:commandLink action="#{orderBean.changeOrderStatus('Receive',c.id)}" styleClass="btn btn-outline-success mr-2" rendered="#{c.status == 'Pending'}">
+                          				<i class="far fa-check-square"></i>
+                          				<f:ajax render="@form"></f:ajax>
+                          			</h:commandLink>
+                          		
+                          			<h:commandLink action="#{orderBean.changeOrderStatus('Deliver',c.id)}" styleClass="btn btn-outline-warning mr-2" rendered="#{c.status == 'Receive'}">
+                          				<i class="fas fa-car"></i>
+                          				<f:ajax render="@form"></f:ajax>
+                          			</h:commandLink>
+                          	</h:column>
+                          </h:dataTable>
+                          </h:form>
+                      </div>
+                  </div>
+              </div>		
+	</ui:define>
 </ui:composition>
 </html>
